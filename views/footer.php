@@ -16,22 +16,8 @@
         }
       },
       submitHandler: function(form) {
-        $("#dataForm").submit(function(e) {
-          e.preventDefault();
-          var data = $("#dataForm").serialize();
-          $.ajax({
-            url: '../index.php?page=create',
-            type: 'post',
-            data: {
-              data: data
-            },
-            dataType: 'json',
-            success: function(response) {
-              console.log(response);
-            }
-          });
-          return false;
-        });
+        alert('clicked');
+        $(form).submit();
       }
     });
 

@@ -13,13 +13,13 @@ class Controller
     {
 
         $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
-
         switch ($page) {
             case ($page === "show"):
                 require "views/show.php";
                 break;
             case ($page === "create"):
-                print_r($_POST);die;
+                print_r($_POST);
+                die;
                 if (isset($_POST['subBtn'])) {
                     $id = $this->prepareData($_POST);
                     header('Location: /index.php?page=show');
@@ -40,9 +40,21 @@ class Controller
         unset($post['subBtn']);
         $post['hash_key'] = hash('sha512', $post['receipt_id']);
         $post['entry_at'] = date('Y-m-d');
-        $post['buyer_ip'] = '122.22.11.99';
+        $post['buyer_ip'] = $this->getIpAddr();
         $id = $this->db->create('tbl_data', $post);
         return $id ?? false;
+    }
+
+    public function getIpAddr()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 
 

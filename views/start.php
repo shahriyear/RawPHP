@@ -20,9 +20,8 @@ require "header.php";
 
 
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
+<div class="row-fulid mt-5">
+        <div class="col-md-10 offset-lg-1">
             <div class="card">
                 <div class="card-header">
                     Data Form
@@ -103,7 +102,6 @@ require "header.php";
                 </div>
             </div>
 
-        </div>
     </div>
 </div>
 
