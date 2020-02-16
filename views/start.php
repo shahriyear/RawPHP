@@ -107,7 +107,16 @@ require "header.php";
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
 
+        var item = tagger(document.querySelector('[name="items"]'), {
+            allow_duplicates: false,
+            allow_spaces: false,
+        });
+
+    });
+</script>
 
 
 

@@ -15,43 +15,45 @@ require "header.php";
 
             </div>
             <div class="card-body">
-                <table class="table">
-                    <tr>
-                        <th>#</th>
-                        <th>Buyer</th>
-                        <th>Amount</th>
-                        <th>Receipt Id</th>
-                        <th>Items</th>
-                        <th>Email</th>
-                        <th>IP</th>
-                        <th>Note</th>
-                        <th>City</th>
-                        <th>Phone</th>
-                        <th>Entry At</th>
-                        <th>Entry By</th>
-                        <!-- <th>Hash</th> -->
-                    </tr>
-                    <?php $i = 1;
-                    foreach ($this->db->readAll('tbl_data') as $value) :
-                    ?>
+                <table class="table" id="myTable">
+                    <thead>
                         <tr>
-                            <td><?php echo $i++ ?></td>
-                            <td><?php echo $value['buyer']; ?></td>
-                            <td><?php echo $value['amount']; ?></td>
-                            <td><?php echo $value['receipt_id']; ?></td>
-                            <td><?php echo $value['items']; ?></td>
-                            <td><?php echo $value['buyer_email']; ?></td>
-                            <td><?php echo $value['buyer_ip']; ?></td>
-                            <td><?php echo $value['note']; ?></td>
-                            <td><?php echo $value['city']; ?></td>
-                            <td><?php echo $value['phone']; ?></td>
-                            <td><?php echo $value['entry_at']; ?></td>
-                            <td><?php echo $value['entry_by']; ?></td>
-                            <td><?php //echo $value['hash_key']; 
-                                ?></td>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Buyer</th>
+                            <th>Amount</th>
+                            <th>Receipt Id</th>
+                            <th>Items</th>
+                            <th>Email</th>
+                            <th>IP</th>
+                            <th>Note</th>
+                            <th>City</th>
+                            <th>Phone</th>
+                            <th>Entry At</th>
+                            <th>Entry By</th>
                         </tr>
-                    <?php endforeach; ?>
-
+                    </thead>
+                    <tbody>
+                        <?php $i = 1;
+                        foreach ($this->db->readAll('tbl_data') as $value) :
+                        ?>
+                            <tr>
+                                <td><?php echo $i++ ?></td>
+                                <td><?php echo $value['id']; ?></td>
+                                <td><?php echo $value['buyer']; ?></td>
+                                <td><?php echo $value['amount']; ?></td>
+                                <td><?php echo $value['receipt_id']; ?></td>
+                                <td><?php echo $value['items']; ?></td>
+                                <td><?php echo $value['buyer_email']; ?></td>
+                                <td><?php echo $value['buyer_ip']; ?></td>
+                                <td><?php echo $value['note']; ?></td>
+                                <td><?php echo $value['city']; ?></td>
+                                <td><?php echo $value['phone']; ?></td>
+                                <td><?php echo $value['entry_at']; ?></td>
+                                <td><?php echo $value['entry_by']; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
                 </table>
             </div>
 
@@ -68,7 +70,11 @@ require "header.php";
 
 
 
-
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+</script>
 
 
 

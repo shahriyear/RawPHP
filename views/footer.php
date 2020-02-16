@@ -1,9 +1,7 @@
 <script>
   $(document).ready(function() {
-    var item = tagger(document.querySelector('[name="items"]'), {
-      allow_duplicates: false,
-      allow_spaces: false,
-    });
+
+
 
     var newItem = '<label for="items">Items</label><input type="text" required name="items" class="multiInput form-control" id="items" placeholder="Items">';
 
