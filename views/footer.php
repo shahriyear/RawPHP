@@ -25,11 +25,17 @@
           data: data,
           dataType: 'json',
           success: function(response) {
-            $("#dataForm")[0].reset();
             if (response.status === 201) {
               $("#message").text('Save Successfully!');
-            } else {
-              $("#message").text(response.message);
+              $("#dataForm")[0].reset();
+            } else if (response.status === "failed") {
+              console.log(response);
+              var html = '<ul>';
+              $.each(response.errors, function(i, v) {
+                html += '<li>' + v + '</li>';
+              });
+              html += '</ul>';
+              $("#message").html(html);
             }
 
           },

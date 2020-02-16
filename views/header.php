@@ -19,6 +19,9 @@
   .error {
     color: red;
   }
+  ul{
+    list-style: none;
+  }
 </style>
 
 <body>
