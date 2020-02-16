@@ -16,46 +16,38 @@
         }
       },
       submitHandler: function() {
-        $("#dataForm").on('submit', function(e) {
-          e.preventDefault();
-          alert('Deafult');
-        })
+
+        $("#message").text('Loading...');
         var data = $("#dataForm").serialize();
         $.ajax({
           url: '../index.php?page=create',
           type: 'post',
-          data: {
-            data: data
-          },
+          data: data,
           dataType: 'json',
           success: function(response) {
-            console.log(response);
-          }
+            $("#dataForm")[0].reset();
+            if (response.status === 201) {
+              $("#message").text('Save Successfully!');
+            } else {
+              $("#message").text(response.message);
+            }
+
+          },
+          complete: function() {
+            setTimeout(function() {
+              $("#message").text('');
+            }, 5000);
+          },
+
         });
-        alert('False');
         return false;
+
+
       }
     });
-
-
 
 
   });
-
-
-  function submitData() {
-    $("#dataForm").preventDeafult();
-    var data = $("#dataForm").serialize();
-    $.ajax({
-      url: '../index.php?page=create',
-      type: 'post',
-      data: $("#dataFrom").serialize(),
-      dataType: 'json',
-      success: function(response) {
-        console.log(response);
-      }
-    });
-  }
 </script>
 
 </body>
