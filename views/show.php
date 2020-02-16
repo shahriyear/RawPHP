@@ -17,6 +17,7 @@ require "header.php";
             <div class="card-body">
                 <table class="table">
                     <tr>
+                        <th>#</th>
                         <th>Buyer</th>
                         <th>Amount</th>
                         <th>Receipt Id</th>
@@ -30,10 +31,11 @@ require "header.php";
                         <th>Entry By</th>
                         <!-- <th>Hash</th> -->
                     </tr>
-                    <?php
+                    <?php $i = 1;
                     foreach ($this->db->readAll('tbl_data') as $value) :
                     ?>
                         <tr>
+                            <td><?php echo $i++ ?></td>
                             <td><?php echo $value['buyer']; ?></td>
                             <td><?php echo $value['amount']; ?></td>
                             <td><?php echo $value['receipt_id']; ?></td>

@@ -8,6 +8,8 @@ $config = require "resources/config/config.php";
 
 $dsn = "mysql:host=" . $config['db_host'] . ";dbname=" . $config['db_name'] . ";charset=" . $config['db_charset'];
 
+
+
 try {
     $pdo = new PDO($dsn, $config['db_user'], $config['db_password'], $config['db_options']);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

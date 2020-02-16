@@ -55,9 +55,9 @@ require "header.php";
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group" id="newItem">
                                 <label for="items">Items</label>
-                                <input type="text" required name="items" class="form-control" id="items" placeholder="Items">
+                                <input type="text" required name="items" class="multiInput form-control" id="items" placeholder="Items">
                             </div>
                         </div>
                         <div class="col-md-6">

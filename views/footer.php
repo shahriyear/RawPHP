@@ -1,6 +1,11 @@
 <script>
   $(document).ready(function() {
+    var item = tagger(document.querySelector('[name="items"]'), {
+      allow_duplicates: false,
+      allow_spaces: false,
+    });
 
+    var newItem = '<label for="items">Items</label><input type="text" required name="items" class="multiInput form-control" id="items" placeholder="Items">';
 
     $("#dataForm").validate({
       rules: {
@@ -28,8 +33,14 @@
             if (response.status === 201) {
               $("#message").text('Save Successfully!');
               $("#dataForm")[0].reset();
+              $("#newItem").html(newItem);
+              tagger(document.querySelector('[name="items"]'), {
+                allow_duplicates: false,
+                allow_spaces: false,
+              });
+
+
             } else if (response.status === "failed") {
-              console.log(response);
               var html = '<ul>';
               $.each(response.errors, function(i, v) {
                 html += '<li>' + v + '</li>';

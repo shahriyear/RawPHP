@@ -11,7 +11,6 @@ class Controller
 
     public function index()
     {
-
         $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
 
         switch ($page) {
@@ -40,6 +39,9 @@ class Controller
     private function validateData($post)
     {
         $err = [];
+        if (isset($_COOKIE['not_allowed'])) {
+            $err['disabled'] = 'Disabled For 24 Hours!';
+        }
         if (!is_numeric($post['amount'])) {
             $err['amount'] = 'Amount Must Be Numeric';
         }
@@ -49,8 +51,12 @@ class Controller
         if (!preg_match("/^[a-zA-Z ]*$/", $post['receipt_id'])) {
             $err['receipt_id'] = 'Receipt Id Must Be Alphabetic';
         }
-        if (!preg_match("/^[a-zA-Z ]*$/", $post['items'])) {
-            $err['items'] = 'Items Must Be Alpha';
+
+        $items = explode(',', $post['items']);
+        foreach ($items as $item) {
+            if (!preg_match("/^[a-zA-Z ]*$/", $item)) {
+                $err['items'] = 'Items Must Be Alpha';
+            }
         }
 
         if (!filter_var($post['buyer_email'], FILTER_VALIDATE_EMAIL)) {
@@ -83,7 +89,7 @@ class Controller
         return $res;
     }
 
-    
+
     private function prepareDataAndCreate($post)
     {
         unset($post['subBtn']);
@@ -96,11 +102,18 @@ class Controller
             $data['status'] = 500;
             $data['message'] = 'SomeThing Went Wrong!';
         } else {
+            $this->preventDuplicate("not_allowed", 'for_next_24_hours_' . $this->getIpAddr());
             $data['status'] = 201;
             $data['id'] = $id;
         }
 
         return json_encode($data);
+    }
+
+
+    private function preventDuplicate($name, $data)
+    {
+        setcookie($name, $data, time() + (86400 * 30), "/");
     }
 
 
