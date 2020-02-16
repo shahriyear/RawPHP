@@ -15,9 +15,25 @@
           email: "Please Enter a Valid E-Mail Address!",
         }
       },
-      submitHandler: function(form) {
-        alert('clicked');
-        $(form).submit();
+      submitHandler: function() {
+        $("#dataForm").on('submit', function(e) {
+          e.preventDefault();
+          alert('Deafult');
+        })
+        var data = $("#dataForm").serialize();
+        $.ajax({
+          url: '../index.php?page=create',
+          type: 'post',
+          data: {
+            data: data
+          },
+          dataType: 'json',
+          success: function(response) {
+            console.log(response);
+          }
+        });
+        alert('False');
+        return false;
       }
     });
 

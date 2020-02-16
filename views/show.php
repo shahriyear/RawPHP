@@ -11,8 +11,8 @@ require "header.php";
             <div class="card-header">
                 Data Form
 
-                <a href="../index.php?page=start">Entry</a>
-                <a href="../index.php?page=show">List</a>
+                <a class="btn btn-sm btn-info float-right" href="../index.php?page=start">Entry</a>
+
             </div>
             <div class="card-body">
                 <table class="table">

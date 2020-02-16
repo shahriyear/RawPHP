@@ -13,6 +13,7 @@ class Controller
     {
 
         $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
+        
         switch ($page) {
             case ($page === "show"):
                 require "views/show.php";
@@ -25,7 +26,7 @@ class Controller
                     header('Location: /index.php?page=show');
                     exit();
                 }
-                require "views/show.php";
+                // require "views/show.php";
                 break;
 
             default:
